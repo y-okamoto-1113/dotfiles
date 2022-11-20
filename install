@@ -4,3 +4,107 @@ echo "##############################################################"
 echo "install script has been run..."
 echo "##############################################################"
 
+set -eu
+
+# maybe WARNING error happens, and process will stop. Read the WARNING message
+if [ ! -f /usr/local/bin/brew ]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+which brew
+
+if [ ! -d ~/dotfiles ]; then
+  cd ~
+  git clone https://github.com/y-okamoto-1113/dotfiles.git
+fi
+
+
+# ブラウザのインストール
+browsers=(
+  google-chrome
+  firefox
+  tor-browser
+)
+for b in $browsers; do
+  echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+  echo "now installing '${b}'..."
+  brew install $b
+done
+
+dev_tools=(
+  git
+  git-secret
+  docker
+  docker-compose
+  visual-studio-code
+  anyenv
+  nodenv
+  nodebrew
+  rbenv
+  golang
+  google-cloud-sdk
+  kubectl
+  tfenv
+  zsh-completions
+)
+
+(zoom slack)
+
+api_clients=(
+  insomnia
+  postman
+)
+for c in $api_clients; do
+  echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+  echo "now installing '${c}'..."
+  brew install $c
+done
+
+# brew おすすめアプリ一覧
+# https://blog.katsubemakito.net/macos/setup-macbookair2020
+other_tools=(
+  karabiner-elements
+  tree
+  monitorcontrol
+  vlc
+  5kplayer
+  imageoptim
+  imagemagick
+  ffmpeg
+  keka
+  proxyman
+  coteditor
+  dbeaver-community
+  lazydocker
+  yarn
+  gnupg
+)
+
+
+hacker_tools=(
+  sl
+)
+
+
+# Apple GitからHomebrew Gitに変更
+# https://qiita.com/Nedward/items/2380fc49183331f0219a
+# homebrewでgitをインストールした場合、インストール先が人によって違うっぽい？ので、パスを動的に生成するために無理やりエスケープ使いまくった。
+# 本当は以下のコマンドを打ちたい。
+# echo 'export PATH="/opt/homebrew/opt/git/bin/git:$PATH"' >> ~/.zshrc
+homebrew_git_path=`brew --prefix git`
+echo "export PATH=\""${homebrew_git_path}"/bin/git:\$PATH\"" >> ~/.zshrc
+
+source ~/.zshrc
+
+
+# dockerはcask
+# Cask List
+casks=(
+  docker
+  notion
+  dbeaver-community
+  devtoys
+  arctype
+)
+
+# graphiqlはbrew経由でインストールすると、開けない。
+
