@@ -44,7 +44,9 @@ dev_tools=(
   google-cloud-sdk
   kubectl
   tfenv
+  youtube-dl
   zsh-completions
+  zsh-autosuggestions
 )
 
 (zoom slack)
