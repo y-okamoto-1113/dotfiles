@@ -40,11 +40,14 @@ dev_tools=(
   nodenv
   nodebrew
   rbenv
+  git-secrets
+  fx
   golang
   google-cloud-sdk
   kubectl
   tfenv
   youtube-dl
+  yt-dlp
   zsh-completions
   zsh-autosuggestions
 )
