@@ -37,6 +37,7 @@ dev_tools=(
   docker-compose
   visual-studio-code
   anyenv
+  mysql
   nodenv
   nodebrew
   rbenv
@@ -50,6 +51,9 @@ dev_tools=(
   yt-dlp
   zsh-completions
   zsh-autosuggestions
+  gitmoji-cli
+  wget
+  awscli
 )
 
 (zoom slack)
@@ -113,3 +117,10 @@ casks=(
 
 # graphiqlはbrew経由でインストールすると、開けない。
 
+
+
+anyenv install -l
+anyenv install goenv
+exec $SHELL -l
+goenv -v
+goenv install -v
