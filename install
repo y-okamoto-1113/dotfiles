@@ -54,6 +54,7 @@ dev_tools=(
   gitmoji-cli
   wget
   awscli
+  figlet
 )
 
 (zoom slack)
