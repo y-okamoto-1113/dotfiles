@@ -25,9 +25,9 @@ if ! command -v brew &> /dev/null; then
   # fi
 
 else
-    echo "Homebrewは既にインストールされています。"
+  echo "Homebrewは既にインストールされています。"
 fi
-if [ ! ]
+
 # インストールしてもPATHが通ってないので、WARNINGメッセージに従ってPATHを通す。
 which brew
 
@@ -36,72 +36,46 @@ if [ ! -d ~/dotfiles ]; then
   git clone https://github.com/y-okamoto-1113/dotfiles.git
 fi
 
-
-# ブラウザのインストール
-browsers=(
-  google-chrome
-  firefox
-  tor-browser
-)
-for b in $browsers; do
-  echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-  echo "now installing '${b}'..."
-  brew install $b
-done
-
-dev_tools=(
+formulaes=(
+  # 開発ツール
   git
   git-secret
-  docker
-  docker-compose
-  visual-studio-code
-  anyenv
-  asdf
-  mysql
-  nodenv
-  nodebrew
-  rbenv
   git-secrets
+  docker-compose
+  asdf
   fx
-  golang
-  google-cloud-sdk
-  kubectl
+  yq
   tfenv
-  youtube-dl
-  yt-dlp
+  gitmoji-cli
+  awscli
+  go
+  # 開発支援ツール
   zsh-completions
   zsh-autosuggestions
-  gitmoji-cli
-  wget
-  awscli
-  figlet
-)
-
-# brew おすすめアプリ一覧
-# https://blog.katsubemakito.net/macos/setup-macbookair2020
-other_tools=(
-  karabiner-elements
+  zsh-syntax-highlighting
   tree
-  monitorcontrol
-  vlc
-  5kplayer
-  imageoptim
+  wget
+  curl
+  eza
+  chroma
+  pygments
+  # 遊び
+  sl
+  figlet
+  f3
+  # その他
+  youtube-dl
+  yt-dlp
   imagemagick
   ffmpeg
-  keka
-  proxyman
-  coteditor
-  dbeaver-community
-  lazydocker
-  yarn
-  gnupg
-  chromedriver
 )
 
+for f in $formulae; do
+  echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+  echo "now installing '${f}'..."
+  brew install --cask $f
+done
 
-hacker_tools=(
-  sl
-)
 
 
 # Apple GitからHomebrew Gitに変更
@@ -113,24 +87,41 @@ homebrew_git_path=`brew --prefix git`
 echo "export PATH=\""${homebrew_git_path}"/bin/git:\$PATH\"" >> ~/.zshrc
 
 source ~/.zshrc
+# brew おすすめアプリ一覧
+# @see https://blog.katsubemakito.net/macos/setup-macbookair2020
 
-
-# dockerはcask
 # Cask List
 casks=(
+  # 開発ツール
   docker
+  orbstack
   visual-studio-code
-  notion
+  tableplus
   dbeaver-community
+  proxyman
+  postman
   devtoys
+  # コミュニケーションツール
+  notion
   zoom
   slack
-  clipy
-  tableplus
+  # ブラウザ
+  google-chrome
+  tor-browser
   pushplaylabs-sidekick
-  postman
+  chromedriver
+  # 業務効率ツール
+  clipy
+  monitorcontrol
+  karabiner-elements
+  keka
+  # その他
+  google-earth-pro
+  vlc
+  imageoptim
+  amorphousdiskmark
 )
-for c in $cask; do
+for c in $casks; do
   echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   echo "now installing '${c}'..."
   brew install --cask $c
@@ -138,8 +129,18 @@ done
 
 # graphiqlはbrew経由でインストールすると、開けない。
 
-
-
+# asdf
 anyenv install -l
 anyenv install goenv
+
+bun install -g serverless
+
+# ccatを使えるようにするための設定
+go install github.com/alecthomas/chroma/cmd/chroma@latest
+
+# oh-my-zshの設定
+git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
 exec $SHELL -l
