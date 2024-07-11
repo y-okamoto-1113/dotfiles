@@ -45,4 +45,3 @@ function precmd() {
     echo ""
   fi
 }
-解説

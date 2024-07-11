@@ -6,10 +6,29 @@ echo "##############################################################"
 
 set -eu
 
-# maybe WARNING error happens, and process will stop. Read the WARNING message
-if [ ! -f /usr/local/bin/brew ]; then
+# Homebrewのインストール
+if ! command -v brew &> /dev/null; then
+  echo "Homebrewが見つかりません。インストールを開始します。"
+
+  # Homebrewをインストール
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  echo "Homebrewのインストールが完了しました。"
+
+  # # パスを通すためにシェルの設定ファイルを更新
+  # if [[ -n "$ZSH_VERSION" ]]; then
+  #   echo 'eval "$(`which brew` shellenv)"' >> ~/.zprofile
+  #   eval "$(`which brew` shellenv)"
+  # elif [[ -n "$BASH_VERSION" ]]; then
+  #   echo 'eval "$(`which brew` shellenv)"' >> ~/.bash_profile
+  #   eval "$(`which brew` shellenv)"
+  # fi
+
+else
+    echo "Homebrewは既にインストールされています。"
 fi
+if [ ! ]
+# インストールしてもPATHが通ってないので、WARNINGメッセージに従ってPATHを通す。
 which brew
 
 if [ ! -d ~/dotfiles ]; then
@@ -37,6 +56,7 @@ dev_tools=(
   docker-compose
   visual-studio-code
   anyenv
+  asdf
   mysql
   nodenv
   nodebrew
@@ -56,18 +76,6 @@ dev_tools=(
   awscli
   figlet
 )
-
-(zoom slack)
-
-api_clients=(
-  insomnia
-  postman
-)
-for c in $api_clients; do
-  echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-  echo "now installing '${c}'..."
-  brew install $c
-done
 
 # brew おすすめアプリ一覧
 # https://blog.katsubemakito.net/macos/setup-macbookair2020
@@ -111,11 +119,22 @@ source ~/.zshrc
 # Cask List
 casks=(
   docker
+  visual-studio-code
   notion
   dbeaver-community
   devtoys
-  arctype
+  zoom
+  slack
+  clipy
+  tableplus
+  pushplaylabs-sidekick
+  postman
 )
+for c in $cask; do
+  echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+  echo "now installing '${c}'..."
+  brew install --cask $c
+done
 
 # graphiqlはbrew経由でインストールすると、開けない。
 
