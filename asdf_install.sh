@@ -1,3 +1,5 @@
+#!/bin/zsh -eux
+
 plugins=(
   nodejs
   ruby

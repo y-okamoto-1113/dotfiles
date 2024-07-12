@@ -1,136 +1,21 @@
-#!/bin/sh
-
-echo "##############################################################"
-echo "install script has been run..."
-echo "##############################################################"
-
-set -eu
-
-# Homebrewのインストール
-if ! command -v brew &> /dev/null; then
-  echo "Homebrewが見つかりません。インストールを開始します。"
-
-  # Homebrewをインストール
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  echo "Homebrewのインストールが完了しました。"
-
-  # # パスを通すためにシェルの設定ファイルを更新
-  # if [[ -n "$ZSH_VERSION" ]]; then
-  #   echo 'eval "$(`which brew` shellenv)"' >> ~/.zprofile
-  #   eval "$(`which brew` shellenv)"
-  # elif [[ -n "$BASH_VERSION" ]]; then
-  #   echo 'eval "$(`which brew` shellenv)"' >> ~/.bash_profile
-  #   eval "$(`which brew` shellenv)"
-  # fi
-
-else
-  echo "Homebrewは既にインストールされています。"
-fi
-
-# インストールしてもPATHが通ってないので、WARNINGメッセージに従ってPATHを通す。
-which brew
+#!/bin/zsh -eux
 
 if [ ! -d ~/dotfiles ]; then
   cd ~
   git clone https://github.com/y-okamoto-1113/dotfiles.git
 fi
 
-formulaes=(
-  # 開発ツール
-  git
-  git-secret
-  git-secrets
-  docker-compose
-  asdf
-  fx
-  yq
-  tfenv
-  gitmoji-cli
-  awscli
-  # 開発支援ツール
-  zsh-completions
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  tree
-  wget
-  curl
-  eza
-  chroma
-  pygments
-  # 遊び
-  sl
-  figlet
-  f3
-  # その他
-  youtube-dl
-  yt-dlp
-  imagemagick
-  ffmpeg
-)
-
-for f in $formulae; do
-  echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-  echo "now installing '${f}'..."
-  brew install --cask $f
-done
-
-
-
 # Apple GitからHomebrew Gitに変更
 # https://qiita.com/Nedward/items/2380fc49183331f0219a
 # homebrewでgitをインストールした場合、インストール先が人によって違うっぽい？ので、パスを動的に生成するために無理やりエスケープ使いまくった。
 # 本当は以下のコマンドを打ちたい。
 # echo 'export PATH="/opt/homebrew/opt/git/bin/git:$PATH"' >> ~/.zshrc
-homebrew_git_path=`brew --prefix git`
-echo "export PATH=\""${homebrew_git_path}"/bin/git:\$PATH\"" >> ~/.zshrc
+homebrew_git_path=$(brew --prefix git)
+echo "export PATH=\""${homebrew_git_path}"/bin/git:\$PATH\"" >>~/.zshrc
 
 source ~/.zshrc
-# brew おすすめアプリ一覧
-# @see https://blog.katsubemakito.net/macos/setup-macbookair2020
-
-# Cask List
-casks=(
-  # 開発ツール
-  docker
-  orbstack
-  visual-studio-code
-  tableplus
-  dbeaver-community
-  proxyman
-  postman
-  devtoys
-  # コミュニケーションツール
-  notion
-  zoom
-  slack
-  # ブラウザ
-  google-chrome
-  tor-browser
-  pushplaylabs-sidekick
-  chromedriver
-  # 業務効率ツール
-  clipy
-  monitorcontrol
-  karabiner-elements
-  keka
-  # その他
-  google-earth-pro
-  vlc
-  imageoptim
-  amorphousdiskmark
-)
-for c in $casks; do
-  echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-  echo "now installing '${c}'..."
-  brew install --cask $c
-done
 
 # graphiqlはbrew経由でインストールすると、開けない。
-
-# asdf
-anyenv install -l
-anyenv install goenv
 
 bun install -g serverless
 
