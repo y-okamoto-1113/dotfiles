@@ -48,7 +48,6 @@ formulaes=(
   tfenv
   gitmoji-cli
   awscli
-  go
   # 開発支援ツール
   zsh-completions
   zsh-autosuggestions
