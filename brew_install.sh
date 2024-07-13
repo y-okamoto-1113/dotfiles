@@ -9,26 +9,19 @@ if [ ! -f /opt/homebrew/bin/brew ]; then
 
   echo "Homebrewのインストールが完了しました。"
 
-  # # パスを通すためにシェルの設定ファイルを更新
-  # if [[ -n "$ZSH_VERSION" ]]; then
-  #   echo 'eval "$(`which brew` shellenv)"' >> ~/.zprofile
-  #   eval "$(`which brew` shellenv)"
-  # elif [[ -n "$BASH_VERSION" ]]; then
-  #   echo 'eval "$(`which brew` shellenv)"' >> ~/.bash_profile
-  #   eval "$(`which brew` shellenv)"
-  # fi
-
+  # パスを通すためにシェルの設定ファイルを更新
+  # コメントで出力される`Next Steps`をやる。
 else
   echo "Homebrewは既にインストールされています。"
 fi
 
+# @note git, curlは`xcode-select --install`でインストールされるので、ここではインストールしない。
 formulaes=(
   # 開発ツール
   asdf
   awscli
   docker-compose
   fx
-  git
   git-secret
   git-secrets
   gitmoji-cli
@@ -36,7 +29,6 @@ formulaes=(
   yq
   # 開発支援ツール
   chroma
-  curl
   eza
   pygments
   tree
@@ -48,13 +40,12 @@ formulaes=(
   figlet
   sl
   # その他
-  youtube-dl
   yt-dlp
   imagemagick
   ffmpeg
 )
 
-for f in $formulae; do
+for f in $formulaes; do
   echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   echo "now installing '${f}'..."
   brew install $f
