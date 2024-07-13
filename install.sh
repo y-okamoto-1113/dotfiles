@@ -7,6 +7,11 @@ if [ $git_result != 0 ]; then
   xcode-select --install
 fi
 
+if [ ! -f ~/.oh-my-zsh ]; then
+  echo "install oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
 if [ ! -d ~/dotfiles ]; then
   cd ~
   git clone https://github.com/y-okamoto-1113/dotfiles.git
