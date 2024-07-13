@@ -12,14 +12,30 @@ sudo chflags nohidden /Volumes # /Volumes ディレクトリを見えるよう�
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName # 時計アイコンクリック時に OS やホスト名 IP を表示する
 defaults write -g NSInitialToolTipDelay -integer 0                                    # ツールチップ表示までのタイムラグをなくす
 defaults write -g NSWindowResizeTime 0.1                                              # ダイアログ表示やウィンドウリサイズ速度を高速化する
+defaults write com.apple.universalaccess "mouseDriverCursorSize" -float 2.5           # マウスカーソルの大きさを最大にする
 
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true      # 全ての拡張子のファイルを表示する
-defaults write NSGlobalDomain com.apple.springing.delay -float 0     # スプリングロード遅延を除去する
-defaults write NSGlobalDomain com.apple.springing.enabled -bool true # ディレクトリのスプリングロードを有効にする
+# Apple Global Domain
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true                # 全ての拡張子のファイルを表示する
+defaults write NSGlobalDomain com.apple.springing.delay -float 0               # スプリングロード遅延を除去する
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true           # ディレクトリのスプリングロードを有効にする
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false # 英語スペル自動修正の無効化
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false     # 文頭の自動大文字の無効化
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -int 0      # スペースバーを2回押すとピリオドにする機能を無効化
+defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool false  # ページ関すワイプを無効化
+defaults write NSGlobalDomain userMenuExtraStyle -int 0                        # メニューバーの時計を表示する
+
+# Kotoeri
+defaults write com.apple.inputmethod.kotoeri JIMPrefCapsLockActionKey -int 4                  # CapsLock キーON・OFFで日本語・英数字入力を切り替える
+defaults write com.apple.inputmethod.kotoeri JIMPrefFullWidthNumeralCharactersKey -bool false # 日本語入力時でも半角数字を使用する
+defaults write com.apple.inputmethod.kotoeri JIMPrefShiftKeyActionKey -int 1                  # Shift キーを押しながらの入力で英数入力に切り替える
 
 # キーボード
 defaults write NSGlobalDomain KeyRepeat -int 2         # キーリピートの速度
 defaults write NSGlobalDomain InitialKeyRepeat -int 15 # キーリピート開始までのタイミング
+
+#
+defaults write com.apple.menuextra.clock "ShowSeconds" -bool true
+killall SystemUIServer
 
 # Finder
 defaults write com.apple.finder _FXSortFoldersFirst -bool true      # 名前で並べ替えを選択時にディレクトリを前に置くようにする
@@ -54,6 +70,15 @@ defaults write com.apple.dock wvous-bl-corner -int 14 # Hot Corners: Bottom Left
 defaults write com.apple.dock wvous-br-corner -int 4  # Hot Corners: Bottom Right → Desktop
 killall Dock
 
+# Display
+defaults write com.apple.Displays-Settings.extension "showListByDefault" -bool true # ディスプレイメニューに表示オプションを追加する
+
+# WindowManager
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false # デスクトップ壁紙クリックでデスクトップを表示する機能を無効化する
+
+# Accessibility
+defaults write com.apple.Accessibilty ReduceMotion -bool false # 視差軽減を無効化
+
 # App Store
 $ defaults write com.apple.appstore WebKitDeveloperExtras -bool true       # WebKitデベロッパーツールを有効にする
 $ defaults write com.apple.appstore ShowDebugMenu -bool true               # デバッグメニューを有効にする
@@ -73,11 +98,16 @@ defaults write -g com.apple.trackpad.scaling -float 3.0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool true
+defaults write NSGlobalDomain com.apple.trackpad.scrolling -float 0.45
 
+# Sound
+defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool true                               # 音量変更フィードバックを有効にする
+defaults write NSGlobalDomain com.apple.sound.beep.sound -string "/System/Library/Sounds/Glass.aiff" # ビープ音を変更する
 
 # その他
 defaults write com.apple.LaunchServices LSQuarantine -bool false    # 未確認のアプリケーションを実行する際のダイアログを無効にする
 defaults write com.apple.menuextra.battery ShowPercent -string "NO" # バッテリーのパーセントを非表示にする
+defaults write com.apple.HIToolbox AppleFnUsageType -int "2"        # 地球儀キーをクリック時に絵文字選択画面を表示する
 
 # @see
 # https://neos21.net/blog/2019/01/10-01.html
