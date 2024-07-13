@@ -116,6 +116,8 @@ defaults write com.apple.HIToolbox AppleFnUsageType -int "2"        # 地球儀�
 # http://tukaikta.blog135.fc2.com/blog-entry-251.html
 # https://www.youtube.com/watch?v=QZr33TQnIRk&ab_channel=Jun%E3%83%91%E3%83%AA%E3%81%AE%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2&loop=0
 # https://macos-defaults.com/
+# https://github.com/joeyhoer/starter/tree/master/system
+# https://github.com/FinalAngel/osx-bootstrap/blob/master/core/defaults.sh
 
 # キーワード検索
 # defaults find wvous-br-corner
