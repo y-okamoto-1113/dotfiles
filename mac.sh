@@ -96,6 +96,11 @@ defaults write -g com.apple.mouse.scaling -float 3.0
 # Trackpad
 defaults write -g com.apple.trackpad.scaling -float 3.0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock -bool false
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool true
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.AppleMultitouchTrackpad DragLock -bool false
+defaults write com.apple.AppleMultitouchTrackpad Dragging -bool true
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool true
 defaults write NSGlobalDomain com.apple.trackpad.scrolling -float 0.45
@@ -124,3 +129,6 @@ defaults write com.apple.HIToolbox AppleFnUsageType -int "2"        # 地球儀�
 
 # 設定値確認
 # defaults read com.apple.dock wvous-br-corner
+
+# ダブルタップでドラッグ＆ドロップするには以下設定が必要。たぶんdefaultsでは管理されていない値。
+# https://chidakiyo.hatenablog.com/entry/mac-double-click-tips
