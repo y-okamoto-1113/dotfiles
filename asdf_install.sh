@@ -1,6 +1,7 @@
 #!/bin/zsh -eux
 
 plugins=(
+  bun
   nodejs
   ruby
   golang
@@ -17,6 +18,10 @@ for p in ${plugins[@]}; do
   echo "====================================================================================="
   asdf global $p latest
 done
+
+# インストールしただけでは一部使えないので、以下のコマンドを実行する。
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+source /opt/homebrew/opt/asdf/libexec/asdf.bash
 
 # asdfの使い方
 # @see https://asdf-vm.com/ja-jp/manage/commands.html
