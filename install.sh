@@ -1,5 +1,12 @@
 #!/bin/zsh -eux
 
+git_result=0
+type git &>/dev/null || git version &>/dev/null || git_result=$?
+if [ $git_result != 0 ]; then
+  echo "install git via xcode command line tools"
+  xcode-select --install
+fi
+
 if [ ! -d ~/dotfiles ]; then
   cd ~
   git clone https://github.com/y-okamoto-1113/dotfiles.git

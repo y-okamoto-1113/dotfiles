@@ -1,7 +1,7 @@
 #!/bin/zsh -eux
 
 # Homebrewのインストール
-if ! command -v brew &>/dev/null; then
+if [ ! -f /opt/homebrew/bin/brew ]; then
   echo "Homebrewが見つかりません。インストールを開始します。"
 
   # Homebrewをインストール
