@@ -29,8 +29,6 @@ source ~/.zshrc
 
 # graphiqlはbrew経由でインストールすると、開けない。
 
-bun install -g serverless
-
 # ccatを使えるようにするための設定
 go install github.com/alecthomas/chroma/cmd/chroma@latest
 
