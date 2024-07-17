@@ -3,6 +3,7 @@
 plugins=(
   bun
   nodejs
+  yarn
   ruby
   golang
   python
