@@ -26,6 +26,7 @@ formulaes=(
   git-secrets
   gitmoji-cli
   tfenv
+  yarn
   yq
   # 開発支援ツール
   chroma

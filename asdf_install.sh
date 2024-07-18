@@ -1,9 +1,9 @@
 #!/bin/zsh -eux
 
+# asdfではyarnを正しくインストールできないので、brewでやる。
 plugins=(
   bun
   nodejs
-  yarn
   ruby
   golang
   python
