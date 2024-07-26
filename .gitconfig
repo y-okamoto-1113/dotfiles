@@ -1,9 +1,25 @@
-[user]
-name = y-okamoto-1113
-email = okamoto.yuuki.1113+github@gmail.com
+[alias]
+cm = commit
+co = checkout
+sw = switch
+ls = ls-files
+st = status
+info = remote show origin
+gr = grep
+graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+
+[color]
+ui = auto
 
 [github]
 user = y-okamoto-1113
 
+[grep]
+
+lineNumber = true
 [init]
 defaultBranch = main
+
+[user]
+name = y-okamoto-1113
+email = okamoto.yuuki.1113+github@gmail.com
