@@ -11,6 +11,10 @@ graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Cr
 [color]
 ui = auto
 
+[diff "lockb"]
+binary=true
+textconv=bun
+
 [github]
 user = y-okamoto-1113
 
